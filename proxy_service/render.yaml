@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: tmdb-proxy
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: TMDB_API_KEY
+        sync: false
+      - key: TMDB_BASE_URL
+        value: https://api.themoviedb.org/3
+      - key: POSTER_BASE_URL
+        value: https://image.tmdb.org/t/p/w500
+      - key: REQUEST_TIMEOUT
+        value: 5
